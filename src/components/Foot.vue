@@ -1,35 +1,48 @@
 <template>
-  <div class="index">
-    <router-link to="/">首页</router-link>
-    <br />
-    <router-link to="/about">关于页</router-link>
-    <br />
-    <router-link to="/list">列表页</router-link>
-    <br />
-    <router-link to="/detial">详情页</router-link>
-    <br />
-    <router-link to="/ilike">我喜欢的</router-link>
-  </div>
+  <ul class="index">
+    <li
+     v-for="(item, index) in itemss" 
+     :key="index"
+     >
+      <router-link :to="item.href">
+        <span>{{item.name}}</span>
+      </router-link>
+    </li>
+  </ul>
 </template>
 <script>
 export default {
-  name: "Foot"
+  props: {
+    itemss: {
+      type: Array
+    }
+  }
 };
 </script>
 
 <style scoped>
+*{
+  margin: 0;
+  padding: 0;
+}
 .index {
   width: 100%;
   height: 60px;
-  border: 1px solid #000;
+  border-top: 1px solid #000;
   position: fixed;
   bottom: 0;
   left: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content:space-around;
   align-items: center;
 }
 a {
   text-decoration: none;
+}
+li {
+  list-style: none;
+}
+span:hover {
+  color: aqua;
 }
 </style>

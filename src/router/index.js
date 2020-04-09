@@ -3,10 +3,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import HelloWorld from '../components/HelloWorld.vue'
-// import About from '../components/About.vue'
+import About from '../components/About.vue'
 import Detial from '../components/Detial.vue'
 import List from '../components/List.vue'
 import Ilike from '../components/Ilike.vue'
+import Infinite from '../components/Infinite.vue'
 
 // const ilike = require('../components/HelloWorld.vue');
 // const about = require('../components/About.vue');
@@ -23,13 +24,16 @@ export default new VueRouter({
         {
             name: 'HelloWorld', path: '/HelloWorld', component: HelloWorld
         }, {
-            name: 'About', path: '/About', component: () => import('../components/About.vue')
+            name: 'About', path: '/About', component: About
         }, {
             name: 'Detial', path: '/Detial', component: Detial
         }, {
             name: 'List', path: '/List', component: List
         }, {
             name: 'Ilike', path: '/Ilike', component: Ilike
+        },
+        {
+            name: 'Infinite', path: '/Infinite', component: Infinite
         },
         { path: '*', redirect: '/HelloWorld' }
     ]
