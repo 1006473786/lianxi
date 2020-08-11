@@ -32,27 +32,27 @@ export default {
         {
           id: 0,
           picture:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586287566771&di=d5e15514e98dc45f8337f545c4b8bf2f&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fpic%2F1%2F30%2F7a09511517.jpg"
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586287566771&di=d5e15514e98dc45f8337f545c4b8bf2f&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fpic%2F1%2F30%2F7a09511517.jpg",
         },
         {
           id: 1,
           picture:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586287566870&di=fb632e76073e74657a415e55dbc1f740&imgtype=0&src=http%3A%2F%2Fwww.mangowed.com%2Fuploads%2Fallimg%2F130510%2F1-130510213Q2209.jpg"
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586287566870&di=fb632e76073e74657a415e55dbc1f740&imgtype=0&src=http%3A%2F%2Fwww.mangowed.com%2Fuploads%2Fallimg%2F130510%2F1-130510213Q2209.jpg",
         },
         {
           id: 2,
           picture:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586288640812&di=9ff35ccbc43ab42e5949bdaf9cf51302&imgtype=0&src=http%3A%2F%2Fimg.hairbobo.com%2Fuploadimg%2F16%2F08%2F19%2F160819200849417.jpg"
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586288640812&di=9ff35ccbc43ab42e5949bdaf9cf51302&imgtype=0&src=http%3A%2F%2Fimg.hairbobo.com%2Fuploadimg%2F16%2F08%2F19%2F160819200849417.jpg",
         },
         {
           id: 3,
           picture:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586288685693&di=c8a08b0cd68a20722a0304c1b987599d&imgtype=0&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D197278149%2C1843408409%26fm%3D214%26gp%3D0.jpg"
-        }
-      ]
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586288640812&di=9ff35ccbc43ab42e5949bdaf9cf51302&imgtype=0&src=http%3A%2F%2Fimg.hairbobo.com%2Fuploadimg%2F16%2F08%2F19%2F160819200849417.jpg",
+        },
+      ],
     };
   },
-  name: "HelloWorld"
+  name: "HelloWorld",
 };
 </script>
 

@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <Foot :itemss="items" />
   </div>
 </template>
@@ -8,21 +10,21 @@
 import Foot from "./components/Foot.vue";
 export default {
   name: "app",
-   data() {
+  data() {
     return {
       items: [
         { name: "首页", href: "/" },
-        { name: "关于页", href: "/About" },
         { name: "列表", href: "/List" },
-        { name: "详情", href: "/Detial" },
-        { name: "我喜欢", href: "/Ilike" }
-      ]
-    }
+        { name: "详情", href: "/Detials" },
+        { name: "购物车", href: "/Card" },
+        { name: "我的", href: "/My" },
+        { name: "登陆", href: "/Login" },
+      ],
+    };
   },
   components: {
-    Foot
+    Foot,
   },
- 
 };
 </script>
 

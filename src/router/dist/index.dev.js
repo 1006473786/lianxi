@@ -11,15 +11,17 @@ var _vueRouter = _interopRequireDefault(require("vue-router"));
 
 var _HelloWorld = _interopRequireDefault(require("../components/HelloWorld.vue"));
 
-var _About = _interopRequireDefault(require("../components/About.vue"));
+var _Card = _interopRequireDefault(require("../components/Card.vue"));
 
-var _Detial = _interopRequireDefault(require("../components/Detial.vue"));
+var _Detials = _interopRequireDefault(require("../components/Detials.vue"));
 
 var _List = _interopRequireDefault(require("../components/List.vue"));
 
-var _Ilike = _interopRequireDefault(require("../components/Ilike.vue"));
+var _Login = _interopRequireDefault(require("../components/Login.vue"));
 
 var _Infinite = _interopRequireDefault(require("../components/Infinite.vue"));
+
+var _qita = _interopRequireDefault(require("../components/qita.vue"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -39,25 +41,29 @@ var _default = new _vueRouter["default"]({
     path: '/HelloWorld',
     component: _HelloWorld["default"]
   }, {
-    name: 'About',
-    path: '/About',
-    component: _About["default"]
+    name: 'Card',
+    path: '/Card',
+    component: _Card["default"]
   }, {
-    name: 'Detial',
-    path: '/Detial',
-    component: _Detial["default"]
+    name: 'Detials',
+    path: '/Detials',
+    component: _Detials["default"]
   }, {
     name: 'List',
     path: '/List',
     component: _List["default"]
   }, {
-    name: 'Ilike',
-    path: '/Ilike',
-    component: _Ilike["default"]
+    name: 'Login',
+    path: '/Login',
+    component: _Login["default"]
   }, {
     name: 'Infinite',
     path: '/Infinite',
     component: _Infinite["default"]
+  }, {
+    name: 'qita',
+    path: '/qita',
+    component: _qita["default"]
   }, {
     path: '*',
     redirect: '/HelloWorld'

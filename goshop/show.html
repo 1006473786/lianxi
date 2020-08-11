@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        　<p v-show="ok">v-show可以控制元素的显隐状态，点击下面的按钮可看到效果。</p>
+        　<button v-on:click='Toggle()'>Toggle</button>
+        　<p>ok：{{ok}}</p>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                ok: true
+            },
+            methods: {
+                Toggle: function () {
+                    this.ok = !this.ok;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

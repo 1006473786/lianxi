@@ -1,0 +1,14 @@
+body {
+  background: rgba(148, 222, 235, 0.582);
+}
+body .inputs {
+  background: #ffd7cd;
+}
+body .inputs .logins {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+body .inputs .logins input {
+  margin: 10px 0;
+}

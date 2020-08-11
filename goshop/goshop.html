@@ -1,0 +1,270 @@
+<template>
+    <div class="hello">
+        <div class="main">
+            <div v-if="hasList">
+                <div class="cart-box">
+                    <div class="cart-list" v-for="(item,index) in carts" :key="index">
+                        <!-- <icon v-if="item.selected" type="success" color="red" data-index="index" class="cart-pro-select" @click="selectList"/>
+       <icon v-else type="circle" class="cart-pro-select" data-index="index" @click="selectList"/> -->
+                        <router-link to="/"><img class="cart-thumb" :src="item.image" /></router-link>
+                        <p class="cart-pro-name">{{item.title}}</p>
+                        <p class="cart-pro-price">￥{{item.price}}</p>
+                        <div class="cart-count-box">
+                            <p class="cart-count-down" @click="minusCount(item.id)" data-obj="obj" data-index="index">-
+                            </p>
+                            <p class="cart-count-num">{{item.num}}</p>
+                            <p class="cart-count-add" @click="addCount(item.id)" data-index="index">+</p>
+                        </div>
+                        <p class="cart-del" @click="deleteList" data-index="index">×</p>
+                    </div>
+                </div>
+
+                <div class="cart-footer">
+                    <!-- <icon v-if="selectAllStatus" type="success_circle" color="#fff" class="total-select" @click="selectAll"/>
+      <icon v-else type="circle" color="#fff" class="total-select" @click="selectAll"/> -->
+                    <div class="order-icon">
+                        <router-link to="/"><img src="../../static/image/icon3.png" /></router-link>
+                    </div>
+                    <p>全选</p>
+                    <p class="cart-toatl-price">￥{{totalPrice}}</p>
+                </div>
+            </div>
+            <div v-else>
+                <div class="cart-no-data">购物车是空的哦~</div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+
+    // import {Toast} from 'vant'
+    export default {
+        data() {
+            return {
+                carts: [{ id: 1, title: '新鲜芹菜 半斤', image: '../../static/image/s5.png', num: 4, price: 0.01, selected: true },
+                { id: 2, title: '素米 500g', image: '../../static/image/s6.png', num: 1, price: 0.03, selected: true }],
+                hasList: true,
+                totalPrice: 0,
+                selectAllStatus: true,
+                obj: {
+                    name: 'hello'
+                }
+            }
+        },
+        created() {
+            // this.$set({
+            // hasList: true,
+            // carts: [
+            //  {id: 1, title: '新鲜芹菜 半斤', image: '../../static/image/s5.png', num: 4, price: 0.01, selected: true},
+            //  {id: 2, title: '素米 500g', image: '../../static/image/s6.png', num: 1, price: 0.03, selected: true}
+            // ]
+            // })
+            this.getTotalPrice()
+        },
+        methods: {
+            selectList(e) {
+                console.log(e)
+                let carts = this.carts
+                let index = 1
+                const selected = carts[index].selected
+                carts[index].selected = !selected
+                this.setData({
+                    carts: carts
+                })
+                this.getTotalPrice()
+            },
+            deleteList(e) {
+                const index = e.currentTarget.dataset.index
+                let carts = this.carts
+                carts.splice(index, 1)
+                this.$set({
+                    carts: carts
+                })
+                if (!carts.length) {
+                    this.$set({
+                        hasList: false
+                    })
+                } else {
+                    this.getTotalPrice()
+                }
+            },
+            selectAll(e) {
+                let selectAllStatus = this.data.selectAllStatus
+                selectAllStatus = !selectAllStatus
+                let carts = this.carts
+
+                for (let i = 0; i < carts.length; i++) {
+                    carts[i].selected = selectAllStatus
+                }
+                this.$set({
+                    selectAllStatus: selectAllStatus,
+                    carts: carts
+                })
+                this.getTotalPrice()
+            },
+            addCount(e) {
+                let carts = this.carts
+                let num = carts[e - 1].num
+                num = num + 1
+                carts[e - 1].num = num
+                this.$set(this.carts, carts)
+                this.getTotalPrice()
+            },
+            minusCount(e) {
+                // const obj = e.currentTarget.dataset.obj
+                let carts = this.carts
+                let num = carts[e - 1].num
+                if (num <= 1) {
+                    return false
+                }
+                num = num - 1
+                carts[e - 1].num = num
+                this.$set(this.carts, carts)
+                this.getTotalPrice()
+            },
+            getTotalPrice() {
+                let carts = this.carts
+                let total = 0
+                for (let i = 0; i < carts.length; i++) {
+                    if (carts[i].selected) {
+                        total += carts[i].num * carts[i].price
+                    }
+                }
+                this.$set({
+                    carts: carts,
+                    totalPrice: total.toFixed(2)
+                })
+            }
+        }
+    }
+</script>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- scoped css样式仅仅在当前模板使用-->
+<style scoped>
+    .cart-box {
+        padding-bottom: 50px;
+    }
+
+    .cart-list {
+        position: relative;
+        padding: 10px 10px 10px 142px;
+        height: 92px;
+        border-bottom: 1px solid #e9e9e9;
+    }
+
+    .cart-list .cart-pro-select {
+        position: absolute;
+        left: 10px;
+        top: 45px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .cart-list .cart-thumb {
+        position: absolute;
+        top: 10px;
+        left: 42px;
+        width: 92px;
+        height: 92px;
+    }
+
+    .cart-list .cart-pro-name {
+        display: inline-block;
+        width: 150px;
+        height: 52px;
+        line-height: 25px;
+        overflow: hidden;
+    }
+
+    .cart-list .cart-pro-price {
+        display: inline-block;
+        float: right;
+        height: 52px;
+        line-height: 25px;
+    }
+
+    .cart-list .cart-count-box {
+        position: absolute;
+        left: 142px;
+        bottom: 10px;
+        width: 125px;
+        height: 40px;
+    }
+
+    .cart-list .cart-count-box p {
+        display: inline-block;
+        line-height: 40px;
+        p-align: center;
+    }
+
+    .cart-count-down,
+    .cart-count-add {
+        position: absolute;
+        top: -5px;
+        font-size: 22px;
+        width: 25px;
+        height: 100%;
+    }
+
+    .cart-count-num {
+        margin-left: 17px;
+        width: 75px;
+    }
+
+    .cart-del {
+        position: absolute;
+        right: 10px;
+        bottom: 0px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        p-align: center;
+        font-size: 22px;
+    }
+
+    .cart-footer {
+        position: fixed;
+        bottom: 15%;
+        left: 0;
+        width: 100%;
+        height: 45px;
+        line-height: 45px;
+        box-sizing: border-box;
+        background: #AB956D;
+        color: #fff;
+    }
+
+    .total-select {
+        position: absolute;
+        left: 10px;
+        top: 12px;
+        width: 22px;
+        height: 22px;
+    }
+
+    .order-icon {
+        position: absolute;
+        right: 20px;
+        top: 12px;
+        width: 24px;
+        height: 24px;
+    }
+
+    .order-icon image,
+    .order-icon navigator {
+        display: block;
+        width: 24px;
+        height: 24px;
+    }
+
+    .cart-toatl-price {
+        float: right;
+        width: 60px;
+    }
+
+    .cart-no-data {
+        padding: 20px 0;
+        color: #999;
+        p-align: center;
+    }
+</style>

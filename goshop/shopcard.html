@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>00000</title>
+    <script src="vue.min.js"></script>
+</head>
+<style>
+    tr,
+    th {
+        width: 110px;
+        height: 30px;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div id="shop">
+    </div>
+</body>
+<script>
+    //购物车模块
+    var Chat = {
+        //子组件接收父组件传递的数据
+        props: ['chatarr'],
+        template: `
+				<div>
+					我的课程
+					<table border="1">
+						<tr>
+							<th>选中</th>
+							<th>课程</th>
+							<th>数量</th>
+							<th>价格</th>
+						</tr>
+						<tr v-for='(chat,index) in chatarr'>
+							<td>
+								<input type="checkbox" v-model='chat.active' name="">
+							</td>
+							<td>{{chat.text}}</td>
+							<td>
+								<span @click='reducecount(index)'>-</span>
+								{{chat.count}}
+								<span @click='addcount(index)'>+</span>
+							</td>
+ 							<td>{{chat.count*chat.price}}</td>
+						</tr>
+						<tr>
+							<td colspan='2'>选中的课程：{{activeCount}}/{{count}}</td>
+							<td colspan='2'>需付金额：{{totalpirce}}</td>
+						</tr>
+					</table>
+				</div>
+			`,
+        computed: {
+            activeCount() {
+                return this.chatarr.filter(v => v.active).length
+            },
+            count() {
+                return this.chatarr.length
+            },
+            totalpirce() {
+                let total = 0;
+                this.chatarr.forEach(v => {
+                    if (v.active) {
+                        total += v.price * v.count
+                    }
+                })
+                return total
+            }
+        },
+        methods: {
+            //点击减号减少商品数量
+            reducecount(index) {
+                if (this.chatarr[index].count > 1) {
+                    this.chatarr[index].count--
+                } else {
+                    if (window.confirm(`确认删除${this.chatarr[index].text}?`))
+                        this.chatarr.splice(index, 1)
+                }
+            },
+
+            //点击加号增加商品数量
+            addcount(index) {
+                this.chatarr[index].count++
+            },
+        },
+        watch: {
+            chatarr: {
+                handler() {
+                    window.localStorage.setItem('chat', JSON.stringify(this.chatarr))
+                },
+                deep: true
+            }
+        }
+    }
+    //实例化
+    new Vue({
+        el: '#shop',
+        template: `
+				<div>
+					<div>
+						课程：<input type="text" name="" v-model='course'>
+
+						价格：<input type="text" name="" v-model='price'>
+
+						<button @click='addcourse'>添加课程</button>
+					</div>
+					<ul>
+						<li  v-for='(list,index) in classlist'>
+
+						课程名称：{{list.text}}---价格：{{list.price}}
+
+						<button @click='addtochat(index)'>添加到我的课程</button>
+
+						</li>
+					</ul>
+					<!-- 父组件给子组件传递数据 -->
+
+					<chat :chatarr='chatarr' ></chat>
+				</div>
+
+			`,
+        components: {
+            Chat
+        },
+        data: {
+            classlist: [],
+            course: '',
+            price: '',
+            //存放购物车信息的数组
+            chatarr: [],
+        },
+        methods: {
+            //添加商品
+            addcourse() {
+                //插入数据
+                this.classlist.push({ text: this.course, price: this.price })
+                //清空输入的内容
+                this.course = ''
+                this.price = ''
+            },
+            //添加到购物车
+            addtochat(index) {
+                const goods = this.classlist[index]
+                const result = this.chatarr.find(v => v.text == goods.text)
+                if (result) {
+                    result.count += 1
+                } else {
+                    this.chatarr.push({ ...goods, count: 1, active: true })
+                }
+            },
+        },
+        created() {
+            if (window.localStorage.getItem('chat') != null) {
+                //获取本地存储数据
+                this.chatarr = JSON.parse(window.localStorage.getItem('chat'))
+            }
+        }
+    })
+</script>
+
+</html>
